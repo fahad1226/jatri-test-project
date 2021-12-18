@@ -1,20 +1,33 @@
 import { createRouter, createWebHistory } from "vue-router";
-import CreateUser from "../components/accounts/CreateUser.vue";
-import EditUser from "../components/accounts/EditUser.vue";
-import UserDetails from "../components/accounts/UserDetails.vue";
-import UserList from "../components/accounts/UserList.vue";
+import Login from "../components/accounts/Login.vue";
+import AlbumDetails from "../components/albums/Album.vue";
+import AlbumList from "../components/albums/List.vue";
 import Home from "../components/Home.vue";
+import CreatePost from "../components/posts/Add.vue";
+import EditPost from "../components/posts/Edit.vue";
+import PostList from "../components/posts/List.vue";
+import PostDetails from "../components/posts/Post.vue";
+import CreateUser from "../components/users/CreateUser.vue";
+import EditUser from "../components/users/EditUser.vue";
+import UserDetails from "../components/users/UserDetails.vue";
+import UserList from "../components/users/UserList.vue";
 
 const routes = [
     {
         path: "/",
-        name: "Home",
+        name: "home",
         component: Home,
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: Login,
     },
     {
         path: "/user-list",
         name: "user-list",
         component: UserList,
+        meta: { requiresAuth: true },
     },
     {
         path: "/create-user",
@@ -31,11 +44,57 @@ const routes = [
         name: "user-details",
         component: UserDetails,
     },
+    {
+        path: "/posts",
+        name: "post-list",
+        component: PostList,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/create/post",
+        name: "create-post",
+        component: CreatePost,
+    },
+    {
+        path: "/edit/post/:postId",
+        name: "edit-post",
+        component: EditPost,
+    },
+    {
+        path: "/details/post/:postId",
+        name: "post-details",
+        component: PostDetails,
+    },
+    {
+        path: "/albums",
+        name: "album-list",
+        component: AlbumList,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/album/details/:albumId",
+        name: "album-details",
+        component: AlbumDetails,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory("/"),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+        console.log("cannot");
+        if (store.state.loginModule.username) {
+            console.log("user ase ", store.state.loginModule.username);
+            next();
+            return;
+        }
+        next("/login");
+    } else {
+        next();
+    }
 });
 
 export default router;

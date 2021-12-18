@@ -1,0 +1,48 @@
+<template>
+    <div>
+        <h1>Add Post</h1>
+        <form @submit.prevent="create">
+            <div>
+                <input
+                    v-model="postInfo.title"
+                    type="text"
+                    placeholder="Type your post title"
+                />
+                <br />
+                <br />
+            </div>
+            <div>
+                <textarea
+                    v-model="postInfo.description"
+                    cols="30"
+                    rows="10"
+                    placeholder="Type your post description"
+                ></textarea>
+                <br />
+                <br />
+            </div>
+
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "CreatePost",
+    data() {
+        return {
+            postInfo: {
+                title: "",
+                description: "",
+            },
+        };
+    },
+    methods: {
+        async create() {
+            const response = await store.dispatch("createPost", this.postInfo);
+            console.log(response); // show the taister
+        },
+    },
+};
+</script>
