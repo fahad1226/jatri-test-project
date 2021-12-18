@@ -133,9 +133,9 @@ export default {
                 const response = await postService.deletePost(postId);
                 if (response.status == 200) {
                     this.posts.splice(postId - 1, 1);
-                    console.log("post deleted, show the toaster");
+                    alert("post deleted");
                 } else {
-                    console.log("something went wrong, try again");
+                    alert("something went wrong, try again");
                 }
             }
         },

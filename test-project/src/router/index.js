@@ -85,9 +85,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-        console.log("cannot");
         if (store.state.loginModule.username) {
-            console.log("user ase ", store.state.loginModule.username);
             next();
             return;
         }

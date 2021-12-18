@@ -6,6 +6,7 @@
                 <input
                     v-model="postInfo.title"
                     type="text"
+                    required
                     placeholder="Type your post title"
                 />
                 <br />
@@ -16,6 +17,7 @@
                     v-model="postInfo.description"
                     cols="30"
                     rows="10"
+                    required
                     placeholder="Type your post description"
                 ></textarea>
                 <br />
@@ -41,7 +43,11 @@ export default {
     methods: {
         async create() {
             const response = await store.dispatch("createPost", this.postInfo);
-            console.log(response); // show the taister
+            if (response == "success") {
+                alert("post added successfully");
+            } else {
+                alert("something went wrong, try again");
+            }
         },
     },
 };

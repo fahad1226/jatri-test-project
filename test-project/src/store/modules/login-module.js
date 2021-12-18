@@ -6,6 +6,7 @@ const loginModule = {
         logins: {},
         authStatus: false,
         username: "",
+        currentUser: "",
     }),
     mutations: {
         updateAllUsers(state, payload) {
@@ -30,6 +31,7 @@ const loginModule = {
                 if (item.username == username && item.username == password) {
                     state.authStatus = true;
                     state.username = username;
+                  
                     //localStorage.setItem("username", username);
                     return "success";
                 } else {

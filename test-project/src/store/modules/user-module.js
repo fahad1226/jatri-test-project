@@ -1,5 +1,4 @@
-import axios from "axios";
-import userServices from "../../config/services/accounts/userService";
+import userService from "../../config/services/accounts/userService";
 
 const userModule = {
     state: () => ({
@@ -23,24 +22,38 @@ const userModule = {
         },
     },
     actions: {
+        async createUser(payload) {
+            const response = await userService.createUser(payload);
+            if (response.status === 201) {
+                return "success";
+            } else {
+                return "error";
+            }
+        },
         async getUsers({ commit }) {
-            const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/users"
-            );
+            const response = await userService.getUsers();
             commit("updategetUsers", response.data);
         },
 
         async getUser({ commit }, userId) {
-            const response = await userServices.getUser(userId);
+            const response = await userService.getUser(userId);
             commit("updategetUser", response.data);
+        },
+        async updateUser({ commit }, payload, userId) {
+            const response = await userService.updateUser(payload, userId);
+            if (response.status === 200) {
+                return "success";
+            } else {
+                return "error";
+            }
         },
 
         async getUserPosts({ commit }, userId) {
-            const response = await userServices.getUserPosts(userId);
+            const response = await userService.getUserPosts(userId);
             commit("updateUserPosts", response.data);
         },
         async getUserTodos({ commit }, userId) {
-            const response = await userServices.getUserTodos(userId);
+            const response = await userService.getUserTodos(userId);
             console.log(response.data);
             commit("updateUserTodos", response.data);
         },

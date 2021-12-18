@@ -1,6 +1,12 @@
 import Api from "../../api";
 
 export default {
+    createUser(payload) {
+        return Api().post("/users", payload);
+    },
+    getUsers() {
+        return Api().get("/users");
+    },
     getUser(userId) {
         return Api().get(`/users/${userId}`);
     },
@@ -14,6 +20,6 @@ export default {
         return Api().get(`/users/${userId}/posts`);
     },
     getUserTodos(userId) {
-        return Api().get(`/users/${userId}/todos`)
-    }
+        return Api().get(`/users/${userId}/todos`);
+    },
 };

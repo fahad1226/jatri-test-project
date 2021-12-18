@@ -1,7 +1,10 @@
 <template>
     <div>
-        
         <h1>All users</h1>
+        <br />
+        <button @click.prevent="this.$router.push('/create-user')">
+            Add new user
+        </button>
         <table>
             <tr>
                 <th>User ID</th>
@@ -65,8 +68,16 @@
         </table>
         <div class="pagination">
             <a>&laquo;</a>
-            <a class="cursor-pointer" @click.prevent="counter = 0">1</a>
-            <a class="cursor-pointer" @click.prevent="counter = 1">2</a>
+
+            <a
+                v-for="page in pagination"
+                :key="page"
+                @click.prevent="counter = page - 1"
+                class="cursor-pointer"
+            >
+                {{ page }}</a
+            >
+
             <a>&raquo;</a>
         </div>
     </div>
@@ -94,6 +105,10 @@ export default {
     computed: {
         users() {
             return store.getters.users;
+        },
+        pagination() {
+            const totalUsers = this.users.length;
+            return Math.ceil(totalUsers / this.limit);
         },
         paginatedUsers() {
             const start = this.counter * this.limit;

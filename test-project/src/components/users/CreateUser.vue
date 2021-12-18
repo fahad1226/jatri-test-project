@@ -1,11 +1,12 @@
 <template>
     <div>
         <h1>Add User</h1>
-        <form @submit.prevent="create">
+        <form @submit.prevent="createUser">
             <div>
                 <label for="name">Name</label>
                 <input
                     v-model="userInfo.name"
+                    required
                     type="text"
                     placeholder="Enter name"
                 />
@@ -16,6 +17,7 @@
                 <label for="username">Username</label>
                 <input
                     v-model="userInfo.username"
+                    required
                     type="text"
                     placeholder="Enter username"
                 />
@@ -26,7 +28,8 @@
                 <label for="email">Email</label>
                 <input
                     v-model="userInfo.email"
-                    type="text"
+                    required
+                    type="email"
                     placeholder="Enter email"
                 />
                 <br />
@@ -38,8 +41,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
     name: "CreateUser",
     data() {
@@ -52,13 +53,13 @@ export default {
         };
     },
     methods: {
-        async create() {
-            const response = await axios.post(
-                "https://jsonplaceholder.typicode.com/users",
-                this.userInfo
-            );
-            console.log(response.data);
-            console.log(response.status);
+        async createUser() {
+            const response = await store.dispatch("createUser", this.userInfo);
+            if (response == "success") {
+                alert("User created successfully");
+            } else {
+                alert("something went wrong, try again later");
+            }
         },
     },
 };

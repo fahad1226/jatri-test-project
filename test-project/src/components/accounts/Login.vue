@@ -43,8 +43,7 @@ export default {
     },
     methods: {
         async getAllUsers() {
-            const response = await store.dispatch("getAllUsers");
-            console.log(response);
+            await store.dispatch("getAllUsers");
         },
         login() {
             store.dispatch("login", this.user);
