@@ -27,7 +27,7 @@ const routes = [
         path: "/user-list",
         name: "user-list",
         component: UserList,
-        meta: { requiresAuth: true },
+        //meta: { requiresAuth: true },
     },
     {
         path: "/create-user",
@@ -48,7 +48,7 @@ const routes = [
         path: "/posts",
         name: "post-list",
         component: PostList,
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
     {
         path: "/create/post",
@@ -69,7 +69,7 @@ const routes = [
         path: "/albums",
         name: "album-list",
         component: AlbumList,
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
     {
         path: "/album/details/:albumId",
@@ -83,7 +83,9 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from, next) => {
+/**
+ * route blocking logic (kinda of a middleware)
+ router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (store.state.loginModule.username) {
             next();
@@ -94,5 +96,6 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+*/
 
 export default router;

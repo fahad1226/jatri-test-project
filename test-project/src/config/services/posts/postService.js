@@ -1,7 +1,9 @@
 import Api from "../../api";
 
 export default {
-    getPosts: () => Api().get("/posts"),
+    getPosts: (userId) => Api().get("posts"),
+
+    getUserPosts: (userId) => Api().get(`/users/${userId}/posts`),
 
     createPost: (payload) => Api().post("/posts", payload),
 

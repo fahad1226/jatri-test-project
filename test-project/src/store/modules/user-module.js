@@ -30,6 +30,7 @@ const userModule = {
                 return "error";
             }
         },
+
         async getUsers({ commit }) {
             const response = await userService.getUsers();
             commit("updategetUsers", response.data);
@@ -39,6 +40,7 @@ const userModule = {
             const response = await userService.getUser(userId);
             commit("updategetUser", response.data);
         },
+
         async updateUser({ commit }, payload, userId) {
             const response = await userService.updateUser(payload, userId);
             if (response.status === 200) {
@@ -52,9 +54,9 @@ const userModule = {
             const response = await userService.getUserPosts(userId);
             commit("updateUserPosts", response.data);
         },
+
         async getUserTodos({ commit }, userId) {
             const response = await userService.getUserTodos(userId);
-            console.log(response.data);
             commit("updateUserTodos", response.data);
         },
     },

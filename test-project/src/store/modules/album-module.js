@@ -21,8 +21,15 @@ const albumModule = {
     },
     actions: {
         async getAlbums({ commit }) {
-            const response = await albumService.getAlbums();
-            commit("updateGetAlbums", response.data);
+            if (this.state.loginModule.username) {
+                const response = await albumService.getUserAlbums(
+                    this.state.loginModule.currentUser
+                );
+                commit("updateGetAlbums", response.data);
+            } else {
+                const response = await albumService.getAlbums();
+                commit("updateGetAlbums", response.data);
+            }
         },
         async getAlbum({ commit }, albumId) {
             const response = await albumService.getAlbum(albumId);
@@ -31,7 +38,7 @@ const albumModule = {
 
         async getAlbumPhotos({ commit }, albumId) {
             const response = await albumService.getAlbumPhotos(albumId);
-            console.log(response.data);
+
             commit("updateAlbumPhotos", response.data);
         },
     },

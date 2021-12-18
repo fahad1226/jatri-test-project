@@ -1,7 +1,10 @@
-# Vue 3 + Vite
+# Jatri test project
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## setup instructions
 
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+1. **Clone the project from github or unzip it.** ( You'll see that I have deleted the **node_modules** directory ).
+2. To install it, go to the project root directory and run the command below.
+    > yarn
+3. To run the project, run the following command:
+    > yarn dev
+4. The application will serve on your localhost.

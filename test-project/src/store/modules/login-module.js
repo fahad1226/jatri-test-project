@@ -20,7 +20,6 @@ const loginModule = {
     actions: {
         async getAllUsers({ commit }) {
             const response = await loginService.getUsers();
-            console.log(response.data);
             commit("updateAllUsers", response.data);
         },
 
@@ -31,7 +30,7 @@ const loginModule = {
                 if (item.username == username && item.username == password) {
                     state.authStatus = true;
                     state.username = username;
-                  
+                    state.currentUser = item.id;
                     //localStorage.setItem("username", username);
                     return "success";
                 } else {
@@ -42,9 +41,6 @@ const loginModule = {
 
         logout({ commit }) {
             commit("updateLogout");
-            // console.log("hello");
-            // localStorage.removeItem("username");
-            // window.reload();
         },
     },
     getters: {

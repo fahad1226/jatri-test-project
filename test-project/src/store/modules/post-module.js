@@ -20,8 +20,17 @@ const postModule = {
     },
     actions: {
         async getPosts({ commit }) {
-            const response = await postService.getPosts();
-            commit("updateGetPosts", response.data);
+            if (this.state.loginModule.username) {
+                const response = await postService.getUserPosts(
+                    this.state.loginModule.currentUser
+                );
+     
+                commit("updateGetPosts", response.data);
+            } else {
+                const response = await postService.getPosts();
+                commit("updateGetPosts", response.data);
+      
+            }
         },
         async createPost({ commit }, payload) {
             const response = await postService.createPost(payload);

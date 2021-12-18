@@ -6,4 +6,6 @@ export default {
     getAlbum: (albumId) => Api().get("/albums/" + albumId),
 
     getAlbumPhotos: (albumId) => Api().get(`/albums/${albumId}/photos`),
+
+    getUserAlbums: (currentUser) => Api().get(`users/${currentUser}/albums`)
 };
